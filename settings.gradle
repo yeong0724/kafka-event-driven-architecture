@@ -8,7 +8,9 @@ include 'worker:content-indexing-worker'
 
 include 'usecase'
 include 'usecase:core'
-include 'usecase:hello-world-usecase'
+include 'usecase:post-usecase'
+include 'usecase:post-resolving-help-usecase'
+
 include 'common'
 include 'api'
 include 'domain'
@@ -23,5 +25,6 @@ include 'adapter:chat-gpt-client'
 include 'adapter:metadata-client'
 include 'adapter:elasticsearch'
 include 'worker:auto-inspection-worker'
-findProject(':worker:auto-inspection-worker')?.name = 'auto-inspection-worker'
+include 'usecase:post-resolving-help-usecase'
+
 

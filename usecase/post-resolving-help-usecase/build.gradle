@@ -1,0 +1,4 @@
+dependencies {
+    // core 에 있는 Port 를 사용하기 위해 의존성 추가
+    implementation(project(":usecase:core"))
+}
