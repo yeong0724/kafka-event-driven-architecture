@@ -1,19 +1,20 @@
 rootProject.name = 'kafka-event-driven-architecture'
 
+include 'api'
 include 'worker'
 include 'worker:auto-inspection-worker'
 include 'worker:content-caching-worker'
 include 'worker:content-subscribing-worker'
 include 'worker:content-indexing-worker'
 
+include 'common'
+include 'domain'
+
 include 'usecase'
 include 'usecase:core'
 include 'usecase:post-usecase'
 include 'usecase:post-resolving-help-usecase'
-
-include 'common'
-include 'api'
-include 'domain'
+include 'usecase:inspected-post-usecase'
 
 include 'adapter'
 include 'adapter:kafka'
@@ -23,8 +24,5 @@ include 'adapter:mongodb'
 include 'adapter:elasticsearch'
 include 'adapter:chat-gpt-client'
 include 'adapter:metadata-client'
-include 'adapter:elasticsearch'
-include 'worker:auto-inspection-worker'
-include 'usecase:post-resolving-help-usecase'
 
 

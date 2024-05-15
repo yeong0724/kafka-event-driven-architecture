@@ -5,9 +5,13 @@ dependencies {
 
     implementation(project(":common"))
     implementation(project(":domain"))
-    implementation(project(":usecase:post-usecase"))
 
+    implementation(project(":usecase:post-usecase"))
+    implementation(project(":usecase:inspected-post-usecase"))
+
+    implementation(project(":adapter:chat-gpt-client"))
     implementation(project(":adapter:mysql"))
     implementation(project(":adapter:kafka"))
     implementation(project(":adapter:metadata-client"))
+
 }
