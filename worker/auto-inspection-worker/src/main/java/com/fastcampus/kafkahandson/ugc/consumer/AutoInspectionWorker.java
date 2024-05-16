@@ -66,6 +66,7 @@ public class AutoInspectionWorker {
         InspectedPost inspectedPost = postInspectUsecase.inspectAndGetIfValid(
             OriginalPostMessageConverter.toModel(originalPostMessage)
         );
+
         if (inspectedPost == null) {
             inspectedPostMessageProducePort.sendDeleteMessage(originalPostMessage.getId());
         } else {
@@ -73,8 +74,8 @@ public class AutoInspectionWorker {
         }
     }
 
+    // DELETE 메시지는 검수가 필요 없으므로 바로 삭제
     private void handleDelete(OriginalPostMessage originalPostMessage) {
-        // DELETE 메시지는 검수가 필요 없으므로 바로 삭제
         inspectedPostMessageProducePort.sendDeleteMessage(originalPostMessage.getId());
     }
 }
