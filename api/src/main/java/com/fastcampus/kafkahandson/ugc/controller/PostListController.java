@@ -1,6 +1,7 @@
 package com.fastcampus.kafkahandson.ugc.controller;
 
 import com.fastcampus.kafkahandson.ugc.model.PostListDto;
+import com.fastcampus.kafkahandson.ugc.SubscribingPostListUsecase;
 import com.fastcampus.kafkahandson.ugc.post.model.ResolvedPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +13,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/list")
 public class PostListController {
-    @GetMapping("/inbox/{userId}")
-    ResponseEntity<List<PostListDto>> listSubscribingPosts(@PathVariable("userId") Long userId) {
+    private final SubscribingPostListUsecase subscribingPostListUsecase;
 
-        return ResponseEntity.internalServerError().build(); // 500 Error
+    @GetMapping("/inbox/{userId}")
+    ResponseEntity<List<PostListDto>> listSubscribingPosts(
+            @PathVariable("userId") Long userId,
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page
+    ) {
+        List<ResolvedPost> subscribingInboxPosts = subscribingPostListUsecase.listSubscribingInboxPosts(
+                new SubscribingPostListUsecase.Request(page, userId)
+        );
+
+        return ResponseEntity.ok().body(subscribingInboxPosts.stream().map(this::toDto).toList());
     }
 
     @GetMapping("/search")

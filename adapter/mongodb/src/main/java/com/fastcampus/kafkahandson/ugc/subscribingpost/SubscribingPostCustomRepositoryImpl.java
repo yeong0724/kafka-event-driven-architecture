@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class SubscribingPostCustomRepositoryImplement implements SubscribingPostCustomRepository {
+public class SubscribingPostCustomRepositoryImpl implements SubscribingPostCustomRepository {
 
     private final MongoTemplate mongoTemplate;
 

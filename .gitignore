@@ -42,3 +42,5 @@ secrets.yml
 .idea
 /.data
 *.env
+
+usecase/core/src/main/java/com/fastcampus/kafkahandson/ugc/port/SubscribingPostPort.java
