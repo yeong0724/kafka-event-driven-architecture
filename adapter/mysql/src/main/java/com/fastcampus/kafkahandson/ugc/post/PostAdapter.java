@@ -5,6 +5,8 @@ import com.fastcampus.kafkahandson.ugc.post.model.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class PostAdapter implements PostPort {
@@ -24,5 +26,11 @@ public class PostAdapter implements PostPort {
         }
 
         return PostEntityConverter.toModel(postEntity);
+    }
+
+    @Override
+    public List<Post> listByIds(List<Long> ids) {
+        List<PostEntity> postEntities = postJpaRepository.findAllById(ids);
+        return postEntities.stream().map(PostEntityConverter::toModel).toList();
     }
 }
