@@ -14,6 +14,9 @@ spring:
   data:
     mongodb:
       uri: mongodb://rootuser:1234@localhost:27017/campus?authSource=admin
+    redis:
+      host: localhost
+      port: 6379
 
 external-server:
   metadata:
