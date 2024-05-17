@@ -15,20 +15,12 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class AutoInspectionWorker {
-
-    private final CustomObjectMapper objectMapper = new CustomObjectMapper();
-
     private final PostInspectUsecase postInspectUsecase;
     private final InspectedPostMessageProducePort inspectedPostMessageProducePort;
 
-    public AutoInspectionWorker(
-            PostInspectUsecase postInspectUsecase,
-            InspectedPostMessageProducePort inspectedPostMessageProducePort
-    ) {
-        this.postInspectUsecase = postInspectUsecase;
-        this.inspectedPostMessageProducePort = inspectedPostMessageProducePort;
-    }
+    private final CustomObjectMapper objectMapper = new CustomObjectMapper();
 
     @KafkaListener(
         topics = { Topic.ORIGINAL_POST },

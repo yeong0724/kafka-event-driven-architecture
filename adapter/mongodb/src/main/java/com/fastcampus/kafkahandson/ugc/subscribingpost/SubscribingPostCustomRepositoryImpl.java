@@ -17,6 +17,13 @@ public class SubscribingPostCustomRepositoryImpl implements SubscribingPostCusto
     private final MongoTemplate mongoTemplate;
 
     @Override
+    public void deleteAllByPostId(Long postId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("postId").is(postId));
+        mongoTemplate.remove(query, SubscribingPostDocument.class);
+    }
+
+    @Override
     public List<SubscribingPostDocument> findByFollowerUserIdWithPagination(Long followerUserId, int pageNumber, int pageSize) {
         Query query = new Query()
             .addCriteria(Criteria.where("followerUserId").is(followerUserId))

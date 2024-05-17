@@ -14,6 +14,11 @@ public class SubscribingPostAdapter implements SubscribingPostPort {
     private final SubscribingPostRepository subscribingPostRepository;
 
     @Override
+    public void removePostFromFollowerInboxes(Long postId) {
+        subscribingPostRepository.deleteAllByPostId(postId);
+    }
+
+    @Override
     public void addPostToFollowerInboxes(Post post, List<Long> followerUserIds) {
         List<SubscribingPostDocument> documents = followerUserIds.stream().map(
             followerUserId -> SubscribingPostDocument.generate(post, followerUserId)
