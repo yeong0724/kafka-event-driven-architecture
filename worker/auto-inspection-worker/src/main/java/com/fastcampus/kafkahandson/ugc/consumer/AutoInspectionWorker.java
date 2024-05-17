@@ -15,20 +15,12 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class AutoInspectionWorker {
-
-    private final CustomObjectMapper objectMapper = new CustomObjectMapper();
-
     private final PostInspectUsecase postInspectUsecase;
     private final InspectedPostMessageProducePort inspectedPostMessageProducePort;
 
-    public AutoInspectionWorker(
-            PostInspectUsecase postInspectUsecase,
-            InspectedPostMessageProducePort inspectedPostMessageProducePort
-    ) {
-        this.postInspectUsecase = postInspectUsecase;
-        this.inspectedPostMessageProducePort = inspectedPostMessageProducePort;
-    }
+    private final CustomObjectMapper objectMapper = new CustomObjectMapper();
 
     @KafkaListener(
         topics = { Topic.ORIGINAL_POST },
@@ -66,6 +58,7 @@ public class AutoInspectionWorker {
         InspectedPost inspectedPost = postInspectUsecase.inspectAndGetIfValid(
             OriginalPostMessageConverter.toModel(originalPostMessage)
         );
+
         if (inspectedPost == null) {
             inspectedPostMessageProducePort.sendDeleteMessage(originalPostMessage.getId());
         } else {
@@ -73,8 +66,8 @@ public class AutoInspectionWorker {
         }
     }
 
+    // DELETE 메시지는 검수가 필요 없으므로 바로 삭제
     private void handleDelete(OriginalPostMessage originalPostMessage) {
-        // DELETE 메시지는 검수가 필요 없으므로 바로 삭제
         inspectedPostMessageProducePort.sendDeleteMessage(originalPostMessage.getId());
     }
 }
