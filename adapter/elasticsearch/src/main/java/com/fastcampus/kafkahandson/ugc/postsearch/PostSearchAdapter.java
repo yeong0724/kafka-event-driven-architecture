@@ -3,19 +3,15 @@ package com.fastcampus.kafkahandson.ugc.postsearch;
 import com.fastcampus.kafkahandson.ugc.inspectedpost.model.InspectedPost;
 import com.fastcampus.kafkahandson.ugc.port.PostSearchPort;
 import com.fastcampus.kafkahandson.ugc.post.model.Post;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
+@RequiredArgsConstructor
 public class PostSearchAdapter implements PostSearchPort {
     private final PostSearchRepository postSearchRepository;
-
-    @Autowired
-    public PostSearchAdapter(PostSearchRepository postSearchRepository) {
-        this.postSearchRepository = postSearchRepository;
-    }
 
     @Override
     public void indexPost(InspectedPost inspectedPost) {
