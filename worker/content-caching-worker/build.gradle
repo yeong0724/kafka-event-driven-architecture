@@ -1,7 +1,4 @@
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":domain"))
-
     implementation(project(":usecase:post-resolving-help-usecase"))
 
     implementation(project(":adapter:mysql"))
