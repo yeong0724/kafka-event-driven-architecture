@@ -4,6 +4,7 @@ import com.fastcampus.kafkahandson.ugc.CustomObjectMapper;
 import com.fastcampus.kafkahandson.ugc.port.ResolvedPostCachePort;
 import com.fastcampus.kafkahandson.ugc.post.model.ResolvedPost;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -12,16 +13,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
+@RequiredArgsConstructor
 public class ResolvedPostCacheAdapter implements ResolvedPostCachePort {
     private static final String KEY_PREFIX = "resolved_post:v2:";
     private static final Long EXPIRE_SECONDS = 60 * 60 * 24 * 7L;  // 일주일
     private final CustomObjectMapper objectMapper = new CustomObjectMapper();
 
     private final RedisTemplate<String, String> redisTemplate;
-
-    public ResolvedPostCacheAdapter(RedisTemplate<String, String> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public void set(ResolvedPost resolvedPost) {

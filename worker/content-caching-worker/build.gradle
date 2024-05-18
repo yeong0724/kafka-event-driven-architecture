@@ -4,8 +4,7 @@ dependencies {
 
     implementation(project(":usecase:post-resolving-help-usecase"))
 
-    implementation(project(":adapter:kafka"))
     implementation(project(":adapter:mysql"))
     implementation(project(":adapter:redis"))
-    implementation(project(":adapter:metadata-client"))
+
 }

@@ -5,7 +5,7 @@ import com.fastcampus.kafkahandson.ugc.port.PostPort;
 import com.fastcampus.kafkahandson.ugc.port.ResolvedPostCachePort;
 import com.fastcampus.kafkahandson.ugc.post.model.Post;
 import com.fastcampus.kafkahandson.ugc.post.model.ResolvedPost;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,18 +15,12 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class PostResolvingHelpService implements PostResolvingHelpUsecase {
     private final PostPort postPort; // 핵심 원천 데이터
     private final MetadataPort metadataPort; // 부가 데이터
     private final ResolvedPostCachePort resolvedPostCachePort; // 캐시 데이터
-
-    @Autowired
-    public PostResolvingHelpService(PostPort postPort, MetadataPort metadataPort, ResolvedPostCachePort resolvedPostCachePort) {
-        this.postPort = postPort;
-        this.metadataPort = metadataPort;
-        this.resolvedPostCachePort = resolvedPostCachePort;
-    }
 
     @Override
     public ResolvedPost resolvePostById(Long postId) {
