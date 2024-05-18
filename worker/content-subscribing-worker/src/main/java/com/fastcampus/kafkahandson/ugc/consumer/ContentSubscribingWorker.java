@@ -1,7 +1,7 @@
 package com.fastcampus.kafkahandson.ugc.consumer;
 
 import com.fastcampus.kafkahandson.ugc.CustomObjectMapper;
-import com.fastcampus.kafkahandson.ugc.SubscribingPostAddToInboxService;
+import com.fastcampus.kafkahandson.ugc.SubscribingPostAddToInboxUsecase;
 import com.fastcampus.kafkahandson.ugc.SubscribingPostRemoveFromInboxUsecase;
 import com.fastcampus.kafkahandson.ugc.adapter.common.OperationType;
 import com.fastcampus.kafkahandson.ugc.adapter.common.Topic;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class ContentSubscribingWorker {
-    private final SubscribingPostAddToInboxService subscribingPostAddToInboxService;
+    private final SubscribingPostAddToInboxUsecase subscribingPostAddToInboxUsecase;
     private final SubscribingPostRemoveFromInboxUsecase subscribingPostRemoveFromInboxUsecase;
 
     private final CustomObjectMapper objectMapper = new CustomObjectMapper();
@@ -44,7 +44,7 @@ public class ContentSubscribingWorker {
     }
 
     private void handleCreate(InspectedPostMessage inspectedPostMessage) {
-        subscribingPostAddToInboxService.saveSubscribingInboxPost(inspectedPostMessage.getPayload().getPost());
+        subscribingPostAddToInboxUsecase.saveSubscribingInboxPost(inspectedPostMessage.getPayload().getPost());
     }
 
     private void handleDelete(InspectedPostMessage inspectedPostMessage) {
