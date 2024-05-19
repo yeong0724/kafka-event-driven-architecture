@@ -149,7 +149,7 @@ services:
       - kafka2
       - kafka3
   logstash:
-    image: 'docker.elastic.co/logstash/logstash:7.10.2'
+    image: 'docker.elastic.co/logstash/logstash:7.17.21'
     container_name: logstash
     ports:
       - "5044:5044"
