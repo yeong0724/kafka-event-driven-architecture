@@ -4,5 +4,5 @@ dependencies {
     implementation(project(":adapter:mysql"))
     implementation(project(":adapter:redis"))
     implementation(project(":adapter:elasticsearch"))
-
+    implementation(project(":adapter:metadata-client"))
 }

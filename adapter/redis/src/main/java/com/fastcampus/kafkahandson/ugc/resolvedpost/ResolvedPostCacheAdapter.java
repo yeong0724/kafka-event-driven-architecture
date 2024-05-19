@@ -12,10 +12,12 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 
+import static com.fastcampus.kafkahandson.ugc.KeyPrefix.RESOLVED_POST_KEY_PREFIX;
+
 @Component
 @RequiredArgsConstructor
 public class ResolvedPostCacheAdapter implements ResolvedPostCachePort {
-    private static final String KEY_PREFIX = "resolved_post:v2:";
+    // private static final String KEY_PREFIX = "resolved_post:v2:";
     private static final Long EXPIRE_SECONDS = 60 * 60 * 24 * 7L;  // 일주일
     private final CustomObjectMapper objectMapper = new CustomObjectMapper();
 
@@ -73,6 +75,6 @@ public class ResolvedPostCacheAdapter implements ResolvedPostCachePort {
     }
 
     private String generateCacheKey(Long postId) {
-        return KEY_PREFIX + postId;
+        return RESOLVED_POST_KEY_PREFIX + postId;
     }
 }
