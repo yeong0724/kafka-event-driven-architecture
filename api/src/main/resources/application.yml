@@ -24,3 +24,13 @@ spring:
 external-server:
   metadata:
     url: http://localhost:8088
+
+server:
+  tomcat:
+    basedir: .data/tomcat
+    accesslog:
+      enabled: true
+      directory: logs
+      suffix: .log
+      prefix: access_log
+      pattern: "%h %l %u %t \"%r\" %s %b %D \"%{Referer}i\" \"%{User-Agent}i\""
