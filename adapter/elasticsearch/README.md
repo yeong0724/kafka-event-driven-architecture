@@ -44,7 +44,7 @@ PUT post-1
 이후, 아래 명령어를 통해 현재 그 index가 생성되었는지 확인 가능하다.
 
 ```sh
-GET post-1
+GET post_v1/_search
 ```
 
 검색은 아래와 같이 진행한다.
@@ -95,10 +95,10 @@ curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_setti
 POST _template/access-log-index-template
 {
   "index_patterns": [
-    "access-log-*"
+    "access-log-v1-*"
   ],
   "aliases": {
-    "access-log": {}
+    "access-log-v1": {}
   },
   "mappings": {
     "properties": {
